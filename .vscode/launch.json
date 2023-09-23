@@ -5,21 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_state_management",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_state_management (profile mode)",
+            "name": "App (P1)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "toolArgs": [
+                "--dart-define",
+                "P=1",
+            ]
         },
         {
-            "name": "flutter_state_management (release mode)",
+            "name": "App (P2)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "toolArgs": [
+                "--dart-define",
+                "P=2",
+            ]
         }
     ]
 }
