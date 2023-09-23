@@ -6,7 +6,7 @@ part 'p5_my_cart_state.freezed.dart';
 @freezed
 abstract class P5MyCartState implements _$P5MyCartState {
   const factory P5MyCartState({
-    @Default([]) List<Item> items,
+    @Default({}) Set<Item> items,
   }) = _P5MyCartState;
 
   const P5MyCartState._();

@@ -12,15 +12,15 @@ class P5MyCartStateNotifier extends StateNotifier<P5MyCartState> {
 
   void add(Item item) {
     if (!state.items.contains(item)) {
-      state = state.copyWith(items: [...state.items, item]);
+      state = state.copyWith(items: <Item>{...state.items, item});
     }
   }
 
   void remove(Item item) {
     if (state.items.contains(item)) {
-      final newState = [...state.items];
-      final _ = newState.remove(item);
-      state = state.copyWith(items: newState);
+      final newItems = <Item>{...state.items};
+      final _ = newItems.remove(item);
+      state = state.copyWith(items: newItems);
     }
   }
 

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$P5MyCartState {
-  List<Item> get items => throw _privateConstructorUsedError;
+  Set<Item> get items => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $P5MyCartStateCopyWith<P5MyCartState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $P5MyCartStateCopyWith<$Res> {
           P5MyCartState value, $Res Function(P5MyCartState) then) =
       _$P5MyCartStateCopyWithImpl<$Res, P5MyCartState>;
   @useResult
-  $Res call({List<Item> items});
+  $Res call({Set<Item> items});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$P5MyCartStateCopyWithImpl<$Res, $Val extends P5MyCartState>
       items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<Item>,
+              as Set<Item>,
     ) as $Val);
   }
 }
@@ -64,7 +64,7 @@ abstract class _$$_P5MyCartStateCopyWith<$Res>
       __$$_P5MyCartStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Item> items});
+  $Res call({Set<Item> items});
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class __$$_P5MyCartStateCopyWithImpl<$Res>
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<Item>,
+              as Set<Item>,
     ));
   }
 }
@@ -92,17 +92,17 @@ class __$$_P5MyCartStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_P5MyCartState extends _P5MyCartState {
-  const _$_P5MyCartState({final List<Item> items = const []})
+  const _$_P5MyCartState({final Set<Item> items = const {}})
       : _items = items,
         super._();
 
-  final List<Item> _items;
+  final Set<Item> _items;
   @override
   @JsonKey()
-  List<Item> get items {
-    if (_items is EqualUnmodifiableListView) return _items;
+  Set<Item> get items {
+    if (_items is EqualUnmodifiableSetView) return _items;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
+    return EqualUnmodifiableSetView(_items);
   }
 
   @override
@@ -130,11 +130,11 @@ class _$_P5MyCartState extends _P5MyCartState {
 }
 
 abstract class _P5MyCartState extends P5MyCartState {
-  const factory _P5MyCartState({final List<Item> items}) = _$_P5MyCartState;
+  const factory _P5MyCartState({final Set<Item> items}) = _$_P5MyCartState;
   const _P5MyCartState._() : super._();
 
   @override
-  List<Item> get items;
+  Set<Item> get items;
   @override
   @JsonKey(ignore: true)
   _$$_P5MyCartStateCopyWith<_$_P5MyCartState> get copyWith =>

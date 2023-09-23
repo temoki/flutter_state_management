@@ -28,7 +28,7 @@ class P5MyCartPage extends ConsumerWidget {
                 ? ListView.builder(
                     itemCount: myCart.items.length,
                     itemBuilder: (context, index) {
-                      final item = myCart.items[index];
+                      final item = myCart.items.elementAt(index);
                       return CartItemTile(
                         item: item,
                         onTapRemove: () => ref

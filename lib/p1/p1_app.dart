@@ -2,7 +2,6 @@ import 'package:app/common/data/item.dart';
 import 'package:app/p1/p1_catalog_page.dart';
 import 'package:app/p1/p1_my_cart_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ordered_set/ordered_set.dart';
 
 class P1App extends StatefulWidget {
   const P1App({super.key});
@@ -12,7 +11,7 @@ class P1App extends StatefulWidget {
 }
 
 class _P1AppState extends State<P1App> {
-  final myCartItems = OrderedSet<Item>();
+  final Set<Item> myCartItems = {};
 
   @override
   Widget build(BuildContext context) {

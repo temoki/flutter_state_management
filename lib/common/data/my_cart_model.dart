@@ -2,10 +2,9 @@ import 'dart:collection';
 
 import 'package:app/common/data/item.dart';
 import 'package:flutter/material.dart';
-import 'package:ordered_set/ordered_set.dart';
 
 class MyCartModel with ChangeNotifier {
-  final OrderedSet<Item> _items = OrderedSet();
+  final Set<Item> _items = {};
 
   UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
 

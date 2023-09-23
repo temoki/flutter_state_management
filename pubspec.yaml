@@ -16,7 +16,6 @@ dependencies:
   flutter_riverpod:
   freezed_annotation:
   intl:
-  ordered_set:
   provider:
 
 dev_dependencies:
