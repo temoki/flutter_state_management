@@ -1,11 +1,11 @@
+import 'package:app/common/data/item.dart';
 import 'package:flutter/material.dart';
-import 'package:app/common/cart_button.dart';
-import 'package:app/common/catalog_item_tile.dart';
-import 'package:app/common/empty_state.dart';
-import 'package:app/common/error_state.dart';
-import 'package:app/common/item.dart';
-import 'package:app/common/fetch_catalog_items.dart';
-import 'package:app/common/loading_state.dart';
+import 'package:app/common/widget/cart_button.dart';
+import 'package:app/common/widget/catalog_item_tile.dart';
+import 'package:app/common/widget/empty_state.dart';
+import 'package:app/common/widget/error_state.dart';
+import 'package:app/common/data/fetch_catalog_items.dart';
+import 'package:app/common/widget/loading_state.dart';
 
 class P1CatalogPage extends StatefulWidget {
   const P1CatalogPage({

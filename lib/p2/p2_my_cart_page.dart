@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:app/common/cart_item_tile.dart';
-import 'package:app/common/cart_total_amount.dart';
-import 'package:app/common/empty_state.dart';
-import 'package:app/common/show_purchased_snackbar.dart';
-import 'package:app/p2/p2_my_cart_model.dart';
+import 'package:app/common/widget/cart_item_tile.dart';
+import 'package:app/common/widget/cart_total_amount.dart';
+import 'package:app/common/widget/empty_state.dart';
+import 'package:app/common/utility/show_purchased_snackbar.dart';
+import '../common/data/my_cart_model.dart';
 
 class P2MyCartPage extends StatelessWidget {
   const P2MyCartPage({
@@ -11,7 +11,7 @@ class P2MyCartPage extends StatelessWidget {
     required this.myCart,
   });
 
-  final P2MyCartModel myCart;
+  final MyCartModel myCart;
 
   @override
   Widget build(BuildContext context) {

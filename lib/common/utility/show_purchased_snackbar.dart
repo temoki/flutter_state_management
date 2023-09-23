@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/common/format_amount.dart';
+import 'format_amount.dart';
 
 void showPurchasedSnackbar(
   BuildContext context, {

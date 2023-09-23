@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/common/format_amount.dart';
+import 'package:app/common/utility/format_amount.dart';
 
 class CartTotalAmount extends StatelessWidget {
   const CartTotalAmount({

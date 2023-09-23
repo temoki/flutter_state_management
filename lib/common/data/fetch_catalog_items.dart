@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:app/common/item.dart';
+import 'item.dart';
 
-Future<List<Item>> fetchItems() async {
+Future<List<Item>> fetchCatalogItems() async {
   await Future.delayed(const Duration(seconds: 1));
   return const [
     Item(id: 1, name: "Code Smell", color: Color(0xFFE05140), price: 280),

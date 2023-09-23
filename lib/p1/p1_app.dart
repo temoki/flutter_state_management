@@ -1,6 +1,6 @@
-import 'package:app/common/item.dart';
-import 'package:app/p1/p1_catalog_page.dart';
-import 'package:app/p1/p1_my_cart_page.dart';
+import 'package:app/common/data/item.dart';
+import 'p1_catalog_page.dart';
+import 'p1_my_cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ordered_set/ordered_set.dart';
 
