@@ -1,14 +1,13 @@
 import 'package:app/common/data/item.dart';
 import 'package:app/common/data/my_cart_state.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final p5MyCartStateNotifierProvider =
-    StateNotifierProvider<P5MyCartStateNotifier, MyCartState>(
-  (ref) => P5MyCartStateNotifier(),
-);
+part 'p6_my_cart_state_notifier.g.dart';
 
-class P5MyCartStateNotifier extends StateNotifier<MyCartState> {
-  P5MyCartStateNotifier() : super(const MyCartState());
+@riverpod
+class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
+  @override
+  MyCartState build() => const MyCartState();
 
   void add(Item item) {
     if (!state.items.contains(item)) {

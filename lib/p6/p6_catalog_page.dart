@@ -3,19 +3,19 @@ import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
 import 'package:app/common/widget/error_state.dart';
 import 'package:app/common/widget/loading_state.dart';
-import 'package:app/p5/p5_catalog_items_provider.dart';
-import 'package:app/p5/p5_my_cart_state_notifier.dart';
+import 'package:app/p6/p6_catalog_items.dart';
+import 'package:app/p6/p6_my_cart_state_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class P5CatalogPage extends StatelessWidget {
-  const P5CatalogPage({super.key});
+class P6CatalogPage extends StatelessWidget {
+  const P6CatalogPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Catalog (P5)'),
+        title: const Text('Catalog (P6)'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -33,7 +33,7 @@ class _CartButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CartButton(
       badgeCount: ref.watch(
-        p5MyCartStateNotifierProvider.select((state) => state.items.length),
+        p6MyCartStateNotifierProvider.select((state) => state.items.length),
       ),
       onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
     );
@@ -43,12 +43,12 @@ class _CartButton extends ConsumerWidget {
 class _CatalogItemList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myCart = ref.watch(p5MyCartStateNotifierProvider);
+    final myCart = ref.watch(p6MyCartStateNotifierProvider);
     return RefreshIndicator(
       onRefresh: () async {
-        ref.invalidate(p5CatalogItemsProvider);
+        ref.invalidate(p6CatalogItemsProvider);
       },
-      child: ref.watch(p5CatalogItemsProvider).when(
+      child: ref.watch(p6CatalogItemsProvider).when(
             data: (catalogItems) => catalogItems.isNotEmpty
                 ? ListView.builder(
                     itemCount: catalogItems.length,
@@ -58,7 +58,7 @@ class _CatalogItemList extends ConsumerWidget {
                         item: catalogItem,
                         isAdded: myCart.items.contains(catalogItem),
                         onTapAdd: () => ref
-                            .read(p5MyCartStateNotifierProvider.notifier)
+                            .read(p6MyCartStateNotifierProvider.notifier)
                             .add(catalogItem),
                       );
                     },

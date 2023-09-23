@@ -12,6 +12,7 @@ Implementationss of the app example from the [Simple app state management](https
 | P3 | ChangeNotifier + InheritedWidget | [p3](./lib/p3) |
 | P4 | ChangeNotifierProvider (Provider package) | [p4](./lib/p4) |
 | P5 | Riverpod | [p5](./lib/p5) |
+| P6 | Riverpod Generator | [p6](./lib/p6) |
 
 ### P1 / StatefulWidget only
 
@@ -25,10 +26,14 @@ _T.B.D._
 
 _T.B.D._
 
-### P4 / ChangeNotifierProvider (Provider)
+### P4 / ChangeNotifierProvider (Provider package)
 
 _T.B.D._
 
 ### P5 / Riverpod
+
+_T.B.D._
+
+### P6 / Riverpod Generator
 
 _T.B.D._

@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "App (P1)",
+            "name": "P1 / StatefulWidget only",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
@@ -14,7 +14,7 @@
             ]
         },
         {
-            "name": "App (P2)",
+            "name": "P2 / ChangeNotifier",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
@@ -23,7 +23,7 @@
             ]
         },
         {
-            "name": "App (P3)",
+            "name": "P3 / ChangeNotifier + InheritedWidget",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
@@ -32,7 +32,7 @@
             ]
         },
         {
-            "name": "App (P4)",
+            "name": "P4 / ChangeNotifierProvider (Provider package)",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
@@ -41,12 +41,21 @@
             ]
         },
         {
-            "name": "App (P5)",
+            "name": "P5 / Riverpod",
             "request": "launch",
             "type": "dart",
             "toolArgs": [
                 "--dart-define",
                 "P=5",
+            ]
+        },
+        {
+            "name": "P6 / Riverpod Generator",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=6",
             ]
         }
     ]
