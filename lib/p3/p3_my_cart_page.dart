@@ -2,7 +2,7 @@ import 'package:app/common/utility/show_purchased_snackbar.dart';
 import 'package:app/common/widget/cart_item_tile.dart';
 import 'package:app/common/widget/cart_total_amount.dart';
 import 'package:app/common/widget/empty_state.dart';
-import 'package:app/p3/p3_inherited_my_cart.dart';
+import 'package:app/p3/p3_my_cart_inherited_widget.dart';
 import 'package:flutter/material.dart';
 
 class P3MyCartPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class P3MyCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myCart = P3InheritedMyCart.of(context);
+    final myCart = P3MyCartInheritedWidget.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: Navigator.of(context).canPop()

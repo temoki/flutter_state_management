@@ -1,4 +1,4 @@
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/common/utility/show_purchased_snackbar.dart';
 import 'package:app/common/widget/cart_item_tile.dart';
 import 'package:app/common/widget/cart_total_amount.dart';
@@ -20,7 +20,7 @@ class P4MyCartPage extends StatelessWidget {
             : null,
         title: const Text('Cart (P4)'),
       ),
-      body: Consumer<MyCartModel>(
+      body: Consumer<MyCartChangeNotifier>(
         builder: (context, myCart, child) => Column(
           children: [
             Expanded(

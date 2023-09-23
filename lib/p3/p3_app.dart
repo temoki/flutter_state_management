@@ -1,17 +1,17 @@
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/p3/p3_catalog_page.dart';
-import 'package:app/p3/p3_inherited_my_cart.dart';
+import 'package:app/p3/p3_my_cart_inherited_widget.dart';
 import 'package:app/p3/p3_my_cart_page.dart';
 import 'package:flutter/material.dart';
 
 class P3App extends StatelessWidget {
   P3App({super.key});
 
-  final myCart = MyCartModel();
+  final myCart = MyCartChangeNotifier();
 
   @override
   Widget build(BuildContext context) {
-    return P3InheritedMyCart(
+    return P3MyCartInheritedWidget(
       myCart: myCart,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

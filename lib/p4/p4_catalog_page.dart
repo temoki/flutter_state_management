@@ -1,6 +1,6 @@
 import 'package:app/common/data/fetch_catalog_items.dart';
 import 'package:app/common/data/item.dart';
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/common/widget/cart_button.dart';
 import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
@@ -32,7 +32,7 @@ class _P4CatalogPageState extends State<P4CatalogPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: Consumer<MyCartModel>(
+            child: Consumer<MyCartChangeNotifier>(
               builder: (context, myCart, child) => CartButton(
                 badgeCount: myCart.items.length,
                 onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
@@ -54,7 +54,7 @@ class _P4CatalogPageState extends State<P4CatalogPage> {
               if (snapshot.hasData) {
                 final items = snapshot.data!;
                 return items.isNotEmpty
-                    ? Consumer<MyCartModel>(
+                    ? Consumer<MyCartChangeNotifier>(
                         builder: (context, myCart, child) => ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (context, index) {

@@ -1,4 +1,4 @@
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/common/utility/show_purchased_snackbar.dart';
 import 'package:app/common/widget/cart_item_tile.dart';
 import 'package:app/common/widget/cart_total_amount.dart';
@@ -11,7 +11,7 @@ class P2MyCartPage extends StatelessWidget {
     required this.myCart,
   });
 
-  final MyCartModel myCart;
+  final MyCartChangeNotifier myCart;
 
   @override
   Widget build(BuildContext context) {

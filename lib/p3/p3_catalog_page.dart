@@ -5,7 +5,7 @@ import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
 import 'package:app/common/widget/error_state.dart';
 import 'package:app/common/widget/loading_state.dart';
-import 'package:app/p3/p3_inherited_my_cart.dart';
+import 'package:app/p3/p3_my_cart_inherited_widget.dart';
 import 'package:flutter/material.dart';
 
 class P3CatalogPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _P3CatalogPageState extends State<P3CatalogPage> {
 
   @override
   Widget build(BuildContext context) {
-    final myCart = P3InheritedMyCart.of(context);
+    final myCart = P3MyCartInheritedWidget.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog (P3)'),

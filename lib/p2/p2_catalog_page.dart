@@ -1,6 +1,6 @@
 import 'package:app/common/data/fetch_catalog_items.dart';
 import 'package:app/common/data/item.dart';
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/common/widget/cart_button.dart';
 import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
@@ -14,7 +14,7 @@ class P2CatalogPage extends StatefulWidget {
     required this.myCart,
   });
 
-  final MyCartModel myCart;
+  final MyCartChangeNotifier myCart;
 
   @override
   State<P2CatalogPage> createState() => _P2CatalogPageState();

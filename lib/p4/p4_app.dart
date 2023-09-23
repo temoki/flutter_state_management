@@ -1,4 +1,4 @@
-import 'package:app/common/data/my_cart_model.dart';
+import 'package:app/common/data/my_cart_change_notifier.dart';
 import 'package:app/p4/p4_catalog_page.dart';
 import 'package:app/p4/p4_my_cart_page.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ class P4App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyCartModel(),
+      create: (context) => MyCartChangeNotifier(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

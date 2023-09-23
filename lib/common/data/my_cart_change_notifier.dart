@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:app/common/data/item.dart';
 import 'package:flutter/material.dart';
 
-class MyCartModel with ChangeNotifier {
+class MyCartChangeNotifier with ChangeNotifier {
   final Set<Item> _items = {};
 
   UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
