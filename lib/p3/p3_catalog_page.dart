@@ -34,7 +34,7 @@ class _P3CatalogPageState extends State<P3CatalogPage> {
             padding: const EdgeInsets.only(right: 16),
             child: ListenableBuilder(
               listenable: myCart,
-              builder: (context, _) => CartButton(
+              builder: (context, child) => CartButton(
                 badgeCount: myCart.items.length,
                 onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
               ),
@@ -57,7 +57,7 @@ class _P3CatalogPageState extends State<P3CatalogPage> {
                 return items.isNotEmpty
                     ? ListenableBuilder(
                         listenable: myCart,
-                        builder: (context, _) => ListView.builder(
+                        builder: (context, child) => ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (context, index) {
                             final item = items[index];

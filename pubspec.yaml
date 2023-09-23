@@ -15,13 +15,13 @@ dependencies:
     sdk: flutter
   intl: any
   ordered_set: any
+  provider: any
 
 dev_dependencies:
   flutter_lints: any
   flutter_test:
     sdk: flutter
   pedantic_mono: any
-
 flutter:
   uses-material-design: true
 

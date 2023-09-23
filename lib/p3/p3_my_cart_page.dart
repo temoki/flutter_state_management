@@ -22,7 +22,7 @@ class P3MyCartPage extends StatelessWidget {
       ),
       body: ListenableBuilder(
         listenable: myCart,
-        builder: (context, _) => Column(
+        builder: (context, child) => Column(
           children: [
             Expanded(
               child: myCart.items.isNotEmpty

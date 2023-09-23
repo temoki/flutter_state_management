@@ -4,14 +4,10 @@ import 'package:app/common/widget/cart_item_tile.dart';
 import 'package:app/common/widget/cart_total_amount.dart';
 import 'package:app/common/widget/empty_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class P2MyCartPage extends StatelessWidget {
-  const P2MyCartPage({
-    super.key,
-    required this.myCart,
-  });
-
-  final MyCartModel myCart;
+class P4MyCartPage extends StatelessWidget {
+  const P4MyCartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +18,10 @@ class P2MyCartPage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               )
             : null,
-        title: const Text('Cart (P2)'),
+        title: const Text('Cart (P4)'),
       ),
-      body: ListenableBuilder(
-        listenable: myCart,
-        builder: (context, child) => Column(
+      body: Consumer<MyCartModel>(
+        builder: (context, myCart, child) => Column(
           children: [
             Expanded(
               child: myCart.items.isNotEmpty

@@ -7,20 +7,16 @@ import 'package:app/common/widget/empty_state.dart';
 import 'package:app/common/widget/error_state.dart';
 import 'package:app/common/widget/loading_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class P2CatalogPage extends StatefulWidget {
-  const P2CatalogPage({
-    super.key,
-    required this.myCart,
-  });
-
-  final MyCartModel myCart;
+class P4CatalogPage extends StatefulWidget {
+  const P4CatalogPage({super.key});
 
   @override
-  State<P2CatalogPage> createState() => _P2CatalogPageState();
+  State<P4CatalogPage> createState() => _P4CatalogPageState();
 }
 
-class _P2CatalogPageState extends State<P2CatalogPage> {
+class _P4CatalogPageState extends State<P4CatalogPage> {
   Future<List<Item>> catalogItems = fetchCatalogItems();
 
   @override
@@ -32,14 +28,13 @@ class _P2CatalogPageState extends State<P2CatalogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Catalog (P2)'),
+        title: const Text('Catalog (P4)'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: ListenableBuilder(
-              listenable: widget.myCart,
-              builder: (context, child) => CartButton(
-                badgeCount: widget.myCart.items.length,
+            child: Consumer<MyCartModel>(
+              builder: (context, myCart, child) => CartButton(
+                badgeCount: myCart.items.length,
                 onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
               ),
             ),
@@ -59,16 +54,15 @@ class _P2CatalogPageState extends State<P2CatalogPage> {
               if (snapshot.hasData) {
                 final items = snapshot.data!;
                 return items.isNotEmpty
-                    ? ListenableBuilder(
-                        listenable: widget.myCart,
-                        builder: (context, child) => ListView.builder(
+                    ? Consumer<MyCartModel>(
+                        builder: (context, myCart, child) => ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (context, index) {
                             final item = items[index];
                             return CatalogItemTile(
                               item: item,
-                              isAdded: widget.myCart.contains(item),
-                              onTapAdd: () => widget.myCart.add(item),
+                              isAdded: myCart.contains(item),
+                              onTapAdd: () => myCart.add(item),
                             );
                           },
                         ),
