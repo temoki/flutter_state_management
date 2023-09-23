@@ -11,7 +11,7 @@ class ErrorState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Error: ${error.toString()}'),
+      child: Text('Error: $error'),
     );
   }
 }

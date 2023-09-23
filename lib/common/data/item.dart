@@ -4,17 +4,17 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Item implements Comparable<Item> {
-  final int id;
-  final String name;
-  final Color color;
-  final int price;
-
   const Item({
     required this.id,
     required this.name,
     required this.color,
     required this.price,
   });
+
+  final int id;
+  final String name;
+  final Color color;
+  final int price;
 
   Item copyWith({
     int? id,

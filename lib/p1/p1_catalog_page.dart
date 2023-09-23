@@ -1,11 +1,11 @@
+import 'package:app/common/data/fetch_catalog_items.dart';
 import 'package:app/common/data/item.dart';
-import 'package:flutter/material.dart';
 import 'package:app/common/widget/cart_button.dart';
 import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
 import 'package:app/common/widget/error_state.dart';
-import 'package:app/common/data/fetch_catalog_items.dart';
 import 'package:app/common/widget/loading_state.dart';
+import 'package:flutter/material.dart';
 
 class P1CatalogPage extends StatefulWidget {
   const P1CatalogPage({
@@ -15,7 +15,7 @@ class P1CatalogPage extends StatefulWidget {
   });
 
   final List<Item> myCartItems;
-  final Function(Item) onAddItem;
+  final void Function(Item) onAddItem;
 
   @override
   State<P1CatalogPage> createState() => _P1CatalogPageState();
@@ -33,7 +33,7 @@ class _P1CatalogPageState extends State<P1CatalogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Catalog (P1)"),
+        title: const Text('Catalog (P1)'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),

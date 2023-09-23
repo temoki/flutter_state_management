@@ -1,8 +1,8 @@
 import 'package:app/common/data/item.dart';
+import 'package:app/common/utility/show_purchased_snackbar.dart';
 import 'package:app/common/widget/cart_item_tile.dart';
 import 'package:app/common/widget/cart_total_amount.dart';
 import 'package:app/common/widget/empty_state.dart';
-import 'package:app/common/utility/show_purchased_snackbar.dart';
 import 'package:flutter/material.dart';
 
 class P1MyCartPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class P1MyCartPage extends StatelessWidget {
   });
 
   final List<Item> myCartItems;
-  final Function(Item) onRemoveItem;
+  final void Function(Item) onRemoveItem;
   final VoidCallback onClearItems;
 
   @override

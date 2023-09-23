@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:app/common/utility/format_amount.dart';
 import 'package:app/common/data/item.dart';
+import 'package:app/common/utility/format_amount.dart';
+import 'package:flutter/material.dart';
 
 class CartItemTile extends StatelessWidget {
   const CartItemTile({

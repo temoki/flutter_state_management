@@ -1,12 +1,12 @@
 import 'package:app/common/data/fetch_catalog_items.dart';
 import 'package:app/common/data/item.dart';
+import 'package:app/common/data/my_cart_model.dart';
 import 'package:app/common/widget/cart_button.dart';
 import 'package:app/common/widget/catalog_item_tile.dart';
 import 'package:app/common/widget/empty_state.dart';
 import 'package:app/common/widget/error_state.dart';
-import 'package:flutter/material.dart';
 import 'package:app/common/widget/loading_state.dart';
-import '../common/data/my_cart_model.dart';
+import 'package:flutter/material.dart';
 
 class P2CatalogPage extends StatefulWidget {
   const P2CatalogPage({
@@ -32,7 +32,7 @@ class _P2CatalogPageState extends State<P2CatalogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Catalog (P2)"),
+        title: const Text('Catalog (P2)'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
