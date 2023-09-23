@@ -6,21 +6,22 @@ import 'package:app/common/error_state.dart';
 import 'package:app/common/item.dart';
 import 'package:app/common/fetch_catalog_items.dart';
 import 'package:app/common/loading_state.dart';
-import 'package:app/p2/p2_my_cart_model.dart';
 
-class P2CatalogPage extends StatefulWidget {
-  const P2CatalogPage({
+class P1CatalogPage extends StatefulWidget {
+  const P1CatalogPage({
     super.key,
-    required this.myCart,
+    required this.myCartItems,
+    required this.onAddItem,
   });
 
-  final P2MyCartModel myCart;
+  final List<Item> myCartItems;
+  final Function(Item) onAddItem;
 
   @override
-  State<P2CatalogPage> createState() => _P2CatalogPageState();
+  State<P1CatalogPage> createState() => _P1CatalogPageState();
 }
 
-class _P2CatalogPageState extends State<P2CatalogPage> {
+class _P1CatalogPageState extends State<P1CatalogPage> {
   Future<List<Item>> catalogItems = fetchCatalogItems();
 
   @override
@@ -32,16 +33,13 @@ class _P2CatalogPageState extends State<P2CatalogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Catalog (P2)"),
+        title: const Text("Catalog (P1)"),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: ListenableBuilder(
-              listenable: widget.myCart,
-              builder: (context, _) => CartButton(
-                badgeCount: widget.myCart.items.length,
-                onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
-              ),
+            child: CartButton(
+              badgeCount: widget.myCartItems.length,
+              onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
             ),
           ),
         ],
@@ -59,19 +57,16 @@ class _P2CatalogPageState extends State<P2CatalogPage> {
               if (snapshot.hasData) {
                 final items = snapshot.data!;
                 return items.isNotEmpty
-                    ? ListenableBuilder(
-                        listenable: widget.myCart,
-                        builder: (context, _) => ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            final item = items[index];
-                            return CatalogItemTile(
-                              item: item,
-                              isAdded: widget.myCart.contains(item),
-                              onTapAdd: () => widget.myCart.add(item),
-                            );
-                          },
-                        ),
+                    ? ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          return CatalogItemTile(
+                            item: item,
+                            isAdded: widget.myCartItems.contains(item),
+                            onTapAdd: () => widget.onAddItem(item),
+                          );
+                        },
                       )
                     : const EmptyState();
               } else if (snapshot.hasError) {

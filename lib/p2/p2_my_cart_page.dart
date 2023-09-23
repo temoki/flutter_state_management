@@ -8,10 +8,10 @@ import 'package:app/p2/p2_my_cart_model.dart';
 class P2MyCartPage extends StatelessWidget {
   const P2MyCartPage({
     super.key,
-    required this.cart,
+    required this.myCart,
   });
 
-  final P2MyCartModel cart;
+  final P2MyCartModel myCart;
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +22,21 @@ class P2MyCartPage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               )
             : null,
-        title: const Text('Cart@P2'),
+        title: const Text('Cart (P2)'),
       ),
       body: ListenableBuilder(
-        listenable: cart,
+        listenable: myCart,
         builder: (context, _) => Column(
           children: [
             Expanded(
-              child: cart.items.isNotEmpty
+              child: myCart.items.isNotEmpty
                   ? ListView.builder(
-                      itemCount: cart.items.length,
+                      itemCount: myCart.items.length,
                       itemBuilder: (context, index) {
-                        final item = cart.items[index];
+                        final item = myCart.items[index];
                         return CartItemTile(
                           item: item,
-                          onTapRemove: () => cart.remove(item),
+                          onTapRemove: () => myCart.remove(item),
                         );
                       },
                     )
@@ -44,14 +44,14 @@ class P2MyCartPage extends StatelessWidget {
             ),
             const Divider(),
             CartTotalAmount(
-              totalAmount: cart.totalAmount,
+              totalAmount: myCart.totalAmount,
               onTapBuy: () {
                 showPurchasedSnackbar(
                   context,
-                  boughtItemCount: cart.items.length,
-                  totalAmount: cart.totalAmount,
+                  itemCount: myCart.items.length,
+                  totalAmount: myCart.totalAmount,
                 );
-                cart.clear();
+                myCart.clear();
                 Navigator.of(context).pop();
               },
             ),

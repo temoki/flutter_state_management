@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class P2App extends StatelessWidget {
   P2App({super.key});
 
-  final cart = P2MyCartModel();
+  final myCart = P2MyCartModel();
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,8 @@ class P2App extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => P2CatalogPage(cart: cart),
-          '/cart': (context) => P2MyCartPage(cart: cart),
+          '/': (context) => P2CatalogPage(myCart: myCart),
+          '/my_cart': (context) => P2MyCartPage(myCart: myCart),
         });
   }
 }
