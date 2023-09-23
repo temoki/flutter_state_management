@@ -1,7 +1,7 @@
 # Flutter state management
 Implementationss of the app example from the [Simple app state management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple) page of the official Flutter documentation, with various state management patterns.
 
-<img width="300" src="./resources/screenshot1.png" /> <img width="300" src="./resources/screenshot2.png" />
+<img width="300" src="./resources/screenshot_1.png" /> <img width="300" src="./resources/screenshot_2.png" />
 
 ## Patterns
 
