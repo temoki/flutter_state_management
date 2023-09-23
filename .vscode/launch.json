@@ -21,6 +21,15 @@
                 "--dart-define",
                 "P=2",
             ]
+        },
+        {
+            "name": "App (P3)",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=3",
+            ]
         }
     ]
 }
