@@ -13,7 +13,7 @@ Implementations of the app example from the [Simple app state management](https:
 | P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
 | P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
 | P4 | [ChangeNotifierProvider (Provider package)](p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
-| P5 | Riverpod | [lib/p5](./lib/p5) |
+| P5 | [Riverpod](https://github.com/temoki/flutter_state_management#p5--riverpod) | [lib/p5](./lib/p5) |
 | P6 | Riverpod Generator | [lib/p6](./lib/p6) |
 
 ### P1 / StatefulWidget only
@@ -228,7 +228,55 @@ class P4MyCartPage extends StatelessWidget {
 ### P5 / Riverpod
 This pattern uses the [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) package.
 
-_T.B.D._
+- Provide a [StateNotifier](https://pub.dev/documentation/state_notifier/latest/state_notifier/StateNotifier-class.html) containing the state and its update logic via [StateNotifierProvider](https://riverpod.dev/docs/providers/state_notifier_provider).
+```dart
+// lib/p5/p5_my_cart_state_notifier.dart
+
+// ⭐️ Provide a StateNotifier containing the state and its update logic via StateNotifierProvider
+final p5MyCartStateNotifierProvider =
+    StateNotifierProvider<P5MyCartStateNotifier, MyCartState>(
+  (ref) => P5MyCartStateNotifier(),
+);
+
+class P5MyCartStateNotifier extends StateNotifier<MyCartState> {
+  P5MyCartStateNotifier() : super(const MyCartState());
+
+  void add(Item item) { ... }
+
+  void remove(Item item) { ... }
+```
+
+- Watch StateNotifierProvider and rebuild when state is updated.
+- Update state with StateNotifier.
+```dart
+// lib/p5/p5_my_cart_page.dart
+
+class P5MyCartPage extends ConsumerWidget {
+  const P5MyCartPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ⭐️ Watch StateNotifierProvider and rebuild when state is updated.
+    final myCart = ref.watch(p5MyCartStateNotifierProvider);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P5)'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: myCart.items.isNotEmpty
+                ? ListView.builder(
+                    itemCount: myCart.items.length,
+                    itemBuilder: (context, index) {
+                      final item = myCart.items.elementAt(index);
+                      return CartItemTile(
+                        item: item,
+                        // ⭐️ Update state with StateNotifier.
+                        onTapRemove: () => ref
+                            .read(p5MyCartStateNotifierProvider.notifier)
+                            .remove(item),
+```
 
 ### P6 / Riverpod Generator
 

@@ -5,7 +5,7 @@ import 'package:app/p3/p3_my_cart_page.dart';
 import 'package:flutter/material.dart';
 
 class P3App extends StatelessWidget {
-  P3App({super.key});
+  const P3App({super.key});
 
   @override
   Widget build(BuildContext context) {

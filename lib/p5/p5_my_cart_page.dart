@@ -11,6 +11,7 @@ class P5MyCartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ⭐️ Watch StateNotifierProvider and rebuild when state is updated.
     final myCart = ref.watch(p5MyCartStateNotifierProvider);
     return Scaffold(
       appBar: AppBar(
@@ -26,6 +27,7 @@ class P5MyCartPage extends ConsumerWidget {
                       final item = myCart.items.elementAt(index);
                       return CartItemTile(
                         item: item,
+                        // ⭐️ Update state with StateNotifier.
                         onTapRemove: () => ref
                             .read(p5MyCartStateNotifierProvider.notifier)
                             .remove(item),

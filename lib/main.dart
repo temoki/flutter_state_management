@@ -12,7 +12,7 @@ void main() {
     switch (p) {
       1 => const P1App(),
       2 => P2App(),
-      3 => P3App(),
+      3 => const P3App(),
       4 => const P4App(),
       5 => const P5App(),
       6 => const P6App(),
