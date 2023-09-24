@@ -17,7 +17,7 @@ class P2MyCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P2)'),
+        title: const Text('My Cart (P2)'),
       ),
       body: ListenableBuilder(
         listenable: myCart,

@@ -23,7 +23,7 @@ class P1MyCartPage extends StatelessWidget {
         myCartItems.fold<int>(0, (sum, item) => sum + item.price);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P1)'),
+        title: const Text('My Cart (P1)'),
       ),
       body: Column(
         children: [

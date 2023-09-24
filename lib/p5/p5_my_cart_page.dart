@@ -14,7 +14,7 @@ class P5MyCartPage extends ConsumerWidget {
     final myCart = ref.watch(p5MyCartStateNotifierProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P5)'),
+        title: const Text('My Cart (P5)'),
       ),
       body: Column(
         children: [

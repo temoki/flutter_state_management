@@ -13,7 +13,7 @@ class P6MyCartPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P6)'),
+        title: const Text('My Cart (P6)'),
       ),
       body: const _MyCartPageBody(),
     );

@@ -13,7 +13,7 @@ class P3MyCartPage extends StatelessWidget {
     final myCart = P3MyCartInheritedWidget.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P3)'),
+        title: const Text('My Cart (P3)'),
       ),
       body: ListenableBuilder(
         listenable: myCart,

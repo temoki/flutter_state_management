@@ -13,7 +13,7 @@ class P4MyCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cart (P4)'),
+        title: const Text('My Cart (P4)'),
       ),
       body: Consumer<MyCartChangeNotifier>(
         builder: (context, myCart, child) => Column(
