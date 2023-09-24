@@ -7,13 +7,11 @@ import 'package:flutter/material.dart';
 class P3App extends StatelessWidget {
   P3App({super.key});
 
-  final myCart = MyCartChangeNotifier();
-
   @override
   Widget build(BuildContext context) {
     // ⭐️ Insert InheritedWidget with ChangeNotifier in Widget tree.
     return P3MyCartInheritedWidget(
-      myCart: myCart,
+      myCart: MyCartChangeNotifier(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

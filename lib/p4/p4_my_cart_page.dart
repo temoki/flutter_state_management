@@ -15,6 +15,7 @@ class P4MyCartPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Cart (P4)'),
       ),
+      // ⭐️ Use Consumer to listen to changes in ChangeNotifier.
       body: Consumer<MyCartChangeNotifier>(
         builder: (context, myCart, child) => Column(
           children: [

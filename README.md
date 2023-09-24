@@ -12,12 +12,12 @@ Implementations of the app example from the [Simple app state management](https:
 | P1 | [StatefulWidget only](#p1--statefulwidget-only) | [lib/p1](./lib/p1) |
 | P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
 | P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
-| P4 | ChangeNotifierProvider (Provider package) | [lib/p4](./lib/p4) |
+| P4 | [ChangeNotifierProvider (Provider package)](p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
 | P5 | Riverpod | [lib/p5](./lib/p5) |
 | P6 | Riverpod Generator | [lib/p6](./lib/p6) |
 
 ### P1 / StatefulWidget only
-- Lift up the state shared by multiple widgets to their parent widget.
+- Lift up the state shared by multiple widgets to their parent [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
 - Relay that state to any descendant widget that needs it.
 - Events that require state updates are also lifted up.
 
@@ -25,7 +25,7 @@ Implementations of the app example from the [Simple app state management](https:
 // lib/p1/p1_app.dart
 
 class _P1AppState extends State<P1App> {
-  // ⭐️ Lift up the state shared by multiple widgets to their parent `StatefulWidget`.
+  // ⭐️ Lift up the state shared by multiple widgets to their parent StatefulWidget.
   final Set<Item> myCartItems = {};
 
   @override
@@ -49,7 +49,7 @@ class _P1AppState extends State<P1App> {
 ```
 
 ### P2 / ChangeNotifier
-- Include the state shared by multiple widgets and its update logic in the ChangeNotifier.
+- Include the state shared by multiple widgets and its update logic in the [ChangeNotifier](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html).
 ```dart
 // lib/common/data/my_cart_change_notifier.dart
 
@@ -89,7 +89,7 @@ class P2App extends StatelessWidget {
         '/': (context) => P2CatalogPage(myCart: myCart),
 ```
 
-- Wrap widgets affected by ChangeNotifier updates in ListenableBuilder.
+- Wrap widgets affected by ChangeNotifier updates in [ListenableBuilder](https://api.flutter.dev/flutter/widgets/ListenableBuilder-class.html).
 ```dart
 // lib/p2/p2_my_cart_page.dart
 
@@ -125,7 +125,7 @@ class P2MyCartPage extends StatelessWidget {
             ),
 ```
 ### P3 / ChangeNotifier + InheritedWidget
-- Expose ChangeNotifier through InheritedWidget.
+- Expose ChangeNotifier through [`InheritedWidget`](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html).
 - Since ChangeNotifier has change notification function, update notification by InheritedWidget is not required.
 - Static method `of` to get the InheritedWidget that is an ancestor of the Widget tree.
 ```dart
@@ -154,13 +154,11 @@ class P3MyCartInheritedWidget extends InheritedWidget {
 class P3App extends StatelessWidget {
   P3App({super.key});
 
-  final myCart = MyCartChangeNotifier();
-
   @override
   Widget build(BuildContext context) {
     // ⭐️ Insert InheritedWidget with ChangeNotifier in Widget tree.
     return P3MyCartInheritedWidget(
-      myCart: myCart,
+      myCart: MyCartChangeNotifier(),
       child: MaterialApp(
 ```
 
@@ -185,10 +183,50 @@ class P3MyCartPage extends StatelessWidget {
 ```
 
 ### P4 / ChangeNotifierProvider (Provider package)
+This pattern uses the [provider](https://pub.dev/packages/provider) package.
 
-_T.B.D._
+- Insert [ChangeNotifierProvider](https://pub.dev/documentation/provider/latest/provider/ChangeNotifierProvider-class.html) with ChangeNotifier in Widget tree.
+```dart
+// lib/p4/p4_app.dart
+
+class P4App extends StatelessWidget {
+  const P4App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Insert ChangeNotifierProvider with ChangeNotifier in Widget tree.
+    return ChangeNotifierProvider(
+      create: (context) => MyCartChangeNotifier(),
+      child: MaterialApp(
+```
+
+- Use Consumer to listen to changes in ChangeNotifier.
+```dart
+// p4/p4_my_cart_page.dart
+
+class P4MyCartPage extends StatelessWidget {
+  const P4MyCartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P4)'),
+      ),
+      // ⭐️ Use Consumer to listen to changes in ChangeNotifier.
+      body: Consumer<MyCartChangeNotifier>(
+        builder: (context, myCart, child) => Column(
+          children: [
+            Expanded(
+              child: myCart.items.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: myCart.items.length,
+                      itemBuilder: (context, index) {
+                        final item = myCart.items[index];
+```
 
 ### P5 / Riverpod
+This pattern uses the [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) package.
 
 _T.B.D._
 

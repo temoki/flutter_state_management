@@ -9,6 +9,7 @@ class P4App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ⭐️ Insert ChangeNotifierProvider with ChangeNotifier in Widget tree.
     return ChangeNotifierProvider(
       create: (context) => MyCartChangeNotifier(),
       child: MaterialApp(
