@@ -11,7 +11,7 @@ Implementations of the app example from the [Simple app state management](https:
 | --- | --- | --- |
 | P1 | [StatefulWidget only](#p1--statefulwidget-only) | [lib/p1](./lib/p1) |
 | P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
-| P3 | ChangeNotifier + InheritedWidget | [lib/p3](./lib/p3) |
+| P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
 | P4 | ChangeNotifierProvider (Provider package) | [lib/p4](./lib/p4) |
 | P5 | Riverpod | [lib/p5](./lib/p5) |
 | P6 | Riverpod Generator | [lib/p6](./lib/p6) |
@@ -125,8 +125,64 @@ class P2MyCartPage extends StatelessWidget {
             ),
 ```
 ### P3 / ChangeNotifier + InheritedWidget
+- Expose ChangeNotifier through InheritedWidget.
+- Since ChangeNotifier has change notification function, update notification by InheritedWidget is not required.
+- Static method `of` to get the InheritedWidget that is an ancestor of the Widget tree.
+```dart
+// lib/p3/p3_my_cart_inherited_widget
 
-_T.B.D._
+class P3MyCartInheritedWidget extends InheritedWidget {
+  const P3MyCartInheritedWidget({
+    super.key, required super.child, required this.myCart});
+
+  // ⭐️ Expose ChangeNotifier through InheritedWidget.
+  final MyCartChangeNotifier myCart;
+
+  // ⭐️ Since ChangeNotifier has change notification function,
+  //    update notification by InheritedWidget is not required.
+  @override
+  bool updateShouldNotify(P3MyCartInheritedWidget oldWidget) => false;
+
+  // ⭐️ Static method `of` to get the InheritedWidget that is an ancestor of the Widget tree.
+  static P3MyCartInheritedWidget of(BuildContext context) {
+```
+
+- Insert InheritedWidget with ChangeNotifier in Widget tree.
+```dart
+// lib/p3/p3_app.dart
+
+class P3App extends StatelessWidget {
+  P3App({super.key});
+
+  final myCart = MyCartChangeNotifier();
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Insert InheritedWidget with ChangeNotifier in Widget tree.
+    return P3MyCartInheritedWidget(
+      myCart: myCart,
+      child: MaterialApp(
+```
+
+- Get ChangeNotifier through InheritedWidget.
+```dart
+// lib/p3/p3_my_cart_page.dart
+
+class P3MyCartPage extends StatelessWidget {
+  const P3MyCartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Get ChangeNotifier through InheritedWidget.
+    final myCart = P3MyCartInheritedWidget.of(context).myCart;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P3)'),
+      ),
+      body: ListenableBuilder(
+        listenable: myCart,
+        builder: (context, child) => Column(
+```
 
 ### P4 / ChangeNotifierProvider (Provider package)
 

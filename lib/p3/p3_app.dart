@@ -11,6 +11,7 @@ class P3App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ⭐️ Insert InheritedWidget with ChangeNotifier in Widget tree.
     return P3MyCartInheritedWidget(
       myCart: myCart,
       child: MaterialApp(

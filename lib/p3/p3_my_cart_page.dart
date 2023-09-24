@@ -10,7 +10,8 @@ class P3MyCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myCart = P3MyCartInheritedWidget.of(context);
+    // ⭐️ Get ChangeNotifier through InheritedWidget.
+    final myCart = P3MyCartInheritedWidget.of(context).myCart;
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Cart (P3)'),

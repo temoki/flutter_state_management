@@ -25,7 +25,7 @@ class _P3CatalogPageState extends State<P3CatalogPage> {
 
   @override
   Widget build(BuildContext context) {
-    final myCart = P3MyCartInheritedWidget.of(context);
+    final myCart = P3MyCartInheritedWidget.of(context).myCart;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog (P3)'),
