@@ -17,11 +17,6 @@ class P2MyCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Navigator.of(context).canPop()
-            ? BackButton(
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            : null,
         title: const Text('Cart (P2)'),
       ),
       body: ListenableBuilder(

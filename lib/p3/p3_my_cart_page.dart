@@ -13,11 +13,6 @@ class P3MyCartPage extends StatelessWidget {
     final myCart = P3MyCartInheritedWidget.of(context);
     return Scaffold(
       appBar: AppBar(
-        leading: Navigator.of(context).canPop()
-            ? BackButton(
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            : null,
         title: const Text('Cart (P3)'),
       ),
       body: ListenableBuilder(

@@ -14,11 +14,6 @@ class P5MyCartPage extends ConsumerWidget {
     final myCart = ref.watch(p5MyCartStateNotifierProvider);
     return Scaffold(
       appBar: AppBar(
-        leading: Navigator.of(context).canPop()
-            ? BackButton(
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            : null,
         title: const Text('Cart (P5)'),
       ),
       body: Column(
