@@ -15,8 +15,35 @@ Implementationss of the app example from the [Simple app state management](https
 | P6 | Riverpod Generator | [p6](./lib/p6) |
 
 ### P1 / StatefulWidget only
+- Lift up the state shared by multiple widgets to their parent widget.
+- Relay that state to any descendant widget that needs it.
+- Events that require state updates are also lifted up.
 
-_T.B.D._
+```dart
+// lib/p1/p1_app.dart
+class _P1AppState extends State<P1App> {
+  // ⭐️ Lift up the state shared by multiple widgets to their parent widget.
+  final Set<Item> myCartItems = {};
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        useMaterial3: true,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => P1CatalogPage(
+              // ⭐️ Relay that state to any descendant widget that needs it.
+              myCartItems: myCartItems.toList(),
+              // ⭐️ Events that require state updates are also lifted up.
+              onAddItem: (item) => setState(
+                () => myCartItems.add(item),
+              ),
+            ),
+```
 
 ### P2 / ChangeNotifier
 

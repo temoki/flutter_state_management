@@ -11,6 +11,7 @@ class P1App extends StatefulWidget {
 }
 
 class _P1AppState extends State<P1App> {
+  // ⭐️ Lift up the state shared by multiple widgets to their parent widget.
   final Set<Item> myCartItems = {};
 
   @override
@@ -24,7 +25,9 @@ class _P1AppState extends State<P1App> {
       initialRoute: '/',
       routes: {
         '/': (context) => P1CatalogPage(
+              // ⭐️ Relay that state to any descendant widget that needs it.
               myCartItems: myCartItems.toList(),
+              // ⭐️ Events that require state updates are also lifted up.
               onAddItem: (item) => setState(
                 () => myCartItems.add(item),
               ),
