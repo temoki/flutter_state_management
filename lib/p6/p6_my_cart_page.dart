@@ -11,44 +11,53 @@ class P6MyCartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myCart = ref.watch(p6MyCartStateNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart (P6)'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: myCart.items.isNotEmpty
-                ? ListView.builder(
-                    itemCount: myCart.items.length,
-                    itemBuilder: (context, index) {
-                      final item = myCart.items.elementAt(index);
-                      return CartItemTile(
-                        item: item,
-                        onTapRemove: () => ref
-                            .read(p6MyCartStateNotifierProvider.notifier)
-                            .remove(item),
-                      );
-                    },
-                  )
-                : const EmptyState(),
-          ),
-          const Divider(),
-          CartTotalAmount(
-            totalAmount: myCart.totalAmount,
-            onTapBuy: () {
-              showPurchasedSnackbar(
-                context,
-                itemCount: myCart.items.length,
-                totalAmount: myCart.totalAmount,
-              );
-              ref.read(p6MyCartStateNotifierProvider.notifier).clear();
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
+      body: const _MyCartPageBody(),
+    );
+  }
+}
+
+class _MyCartPageBody extends ConsumerWidget {
+  const _MyCartPageBody();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final myCart = ref.watch(p6MyCartStateNotifierProvider);
+    return Column(
+      children: [
+        Expanded(
+          child: myCart.items.isNotEmpty
+              ? ListView.builder(
+                  itemCount: myCart.items.length,
+                  itemBuilder: (context, index) {
+                    final item = myCart.items.elementAt(index);
+                    return CartItemTile(
+                      item: item,
+                      onTapRemove: () => ref
+                          .read(p6MyCartStateNotifierProvider.notifier)
+                          .remove(item),
+                    );
+                  },
+                )
+              : const EmptyState(),
+        ),
+        const Divider(),
+        CartTotalAmount(
+          totalAmount: myCart.totalAmount,
+          onTapBuy: () {
+            showPurchasedSnackbar(
+              context,
+              itemCount: myCart.items.length,
+              totalAmount: myCart.totalAmount,
+            );
+            ref.read(p6MyCartStateNotifierProvider.notifier).clear();
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
     );
   }
 }

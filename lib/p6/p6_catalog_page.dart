@@ -16,19 +16,21 @@ class P6CatalogPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog (P6)'),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16),
             child: _CartButton(),
           ),
         ],
       ),
-      body: _CatalogItemList(),
+      body: const _CatalogItemList(),
     );
   }
 }
 
 class _CartButton extends ConsumerWidget {
+  const _CartButton();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CartButton(
@@ -41,6 +43,8 @@ class _CartButton extends ConsumerWidget {
 }
 
 class _CatalogItemList extends ConsumerWidget {
+  const _CatalogItemList();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final myCart = ref.watch(p6MyCartStateNotifierProvider);
