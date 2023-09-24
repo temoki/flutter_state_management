@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'p6_my_cart_state_notifier.g.dart';
 
+// ⭐️ Automatically generate an appropriate provider using @riverpod annotation.
 @riverpod
 class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
   @override

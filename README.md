@@ -14,7 +14,7 @@ Implementations of the app example from the [Simple app state management](https:
 | P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
 | P4 | [ChangeNotifierProvider (Provider package)](p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
 | P5 | [Riverpod](https://github.com/temoki/flutter_state_management#p5--riverpod) | [lib/p5](./lib/p5) |
-| P6 | Riverpod Generator | [lib/p6](./lib/p6) |
+| P6 | [Riverpod Generator](https://github.com/temoki/flutter_state_management#p6--riverpod-generator) | [lib/p6](./lib/p6) |
 
 ### P1 / StatefulWidget only
 - Lift up the state shared by multiple widgets to their parent [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
@@ -279,5 +279,16 @@ class P5MyCartPage extends ConsumerWidget {
 ```
 
 ### P6 / Riverpod Generator
+This pattern uses the [riverpod_generator](https://pub.dev/packages/riverpod_generator) and [riverpod_annotation](https://pub.dev/packages/riverpod_annotation) packages.
 
-_T.B.D._
+```dart
+// ⭐️ Automatically generate an appropriate provider using @riverpod annotation.
+@riverpod
+class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
+  @override
+  MyCartState build() => const MyCartState();
+
+  void add(Item item) { ... }
+
+  void remove(Item item) { ... }
+```
