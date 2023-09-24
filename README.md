@@ -9,8 +9,8 @@ Implementations of the app example from the [Simple app state management](https:
 
 | No. | Pattern | Code |
 | --- | --- | --- |
-| P1 | StatefulWidget only | [lib/p1](./lib/p1) |
-| P2 | ChangeNotifier | [lib/p2](./lib/p2) |
+| P1 | [StatefulWidget only](#p1--statefulwidget-only) | [lib/p1](./lib/p1) |
+| P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
 | P3 | ChangeNotifier + InheritedWidget | [lib/p3](./lib/p3) |
 | P4 | ChangeNotifierProvider (Provider package) | [lib/p4](./lib/p4) |
 | P5 | Riverpod | [lib/p5](./lib/p5) |
@@ -23,8 +23,9 @@ Implementations of the app example from the [Simple app state management](https:
 
 ```dart
 // lib/p1/p1_app.dart
+
 class _P1AppState extends State<P1App> {
-  // ⭐️ Lift up the state shared by multiple widgets to their parent widget.
+  // ⭐️ Lift up the state shared by multiple widgets to their parent `StatefulWidget`.
   final Set<Item> myCartItems = {};
 
   @override
@@ -48,9 +49,81 @@ class _P1AppState extends State<P1App> {
 ```
 
 ### P2 / ChangeNotifier
+- Include the state shared by multiple widgets and its update logic in the ChangeNotifier.
+```dart
+// lib/common/data/my_cart_change_notifier.dart
 
-_T.B.D._
+// ⭐️ Include the state shared by multiple widgets and its update logic in the ChangeNotifier.
+class MyCartChangeNotifier with ChangeNotifier {
+  final Set<Item> _items = {};
 
+  UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
+
+  void add(Item item) { ... }
+
+  void remove(Item item) { ... }
+```
+
+- Keep ChangeNotifier in the parent widget of multiple widgets that require it.
+- Relay that ChangeNotifier to any descendant widget that needs it.
+```dart
+// lib/p2/p2_app.dart
+
+class P2App extends StatelessWidget {
+  P2App({super.key});
+
+  // ⭐️ Keep ChangeNotifier in the parent widget of multiple widgets that require it.
+  final myCart = MyCartChangeNotifier();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        useMaterial3: true,
+      ),
+      initialRoute: '/',
+      routes: {
+        // ⭐️ Relay that ChangeNotifier to any descendant widget that needs it.
+        '/': (context) => P2CatalogPage(myCart: myCart),
+```
+
+- Wrap widgets affected by ChangeNotifier updates in ListenableBuilder.
+```dart
+// lib/p2/p2_my_cart_page.dart
+
+class P2MyCartPage extends StatelessWidget {
+  const P2MyCartPage({super.key, required this.myCart});
+
+  final MyCartChangeNotifier myCart;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P2)'),
+      ),
+      // ⭐️ Wrap widgets affected by ChangeNotifier updates in ListenableBuilder.
+      body: ListenableBuilder(
+        listenable: myCart,
+        builder: (context, child) => Column(
+          children: [
+            Expanded(
+              child: myCart.items.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: myCart.items.length,
+                      itemBuilder: (context, index) {
+                        final item = myCart.items[index];
+                        return CartItemTile(
+                          item: item,
+                          onTapRemove: () => myCart.remove(item),
+                        );
+                      },
+                    )
+                  : const EmptyState(),
+            ),
+```
 ### P3 / ChangeNotifier + InheritedWidget
 
 _T.B.D._

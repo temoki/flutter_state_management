@@ -6,10 +6,7 @@ import 'package:app/common/widget/empty_state.dart';
 import 'package:flutter/material.dart';
 
 class P2MyCartPage extends StatelessWidget {
-  const P2MyCartPage({
-    super.key,
-    required this.myCart,
-  });
+  const P2MyCartPage({super.key, required this.myCart});
 
   final MyCartChangeNotifier myCart;
 
@@ -19,6 +16,8 @@ class P2MyCartPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Cart (P2)'),
       ),
+      // ignore: lines_longer_than_80_chars
+      // ⭐️ Wrap widgets affected by ChangeNotifier updates in ListenableBuilder.
       body: ListenableBuilder(
         listenable: myCart,
         builder: (context, child) => Column(

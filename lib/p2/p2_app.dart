@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class P2App extends StatelessWidget {
   P2App({super.key});
 
+  // ignore: lines_longer_than_80_chars
+  // ⭐️ Keep ChangeNotifier in the parent widget of multiple widgets that require it.
   final myCart = MyCartChangeNotifier();
 
   @override
@@ -18,6 +20,7 @@ class P2App extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
+        // ⭐️ Relay that ChangeNotifier to any descendant widget that needs it.
         '/': (context) => P2CatalogPage(myCart: myCart),
         '/my_cart': (context) => P2MyCartPage(myCart: myCart),
       },

@@ -9,10 +9,7 @@ import 'package:app/common/widget/loading_state.dart';
 import 'package:flutter/material.dart';
 
 class P2CatalogPage extends StatefulWidget {
-  const P2CatalogPage({
-    super.key,
-    required this.myCart,
-  });
+  const P2CatalogPage({super.key, required this.myCart});
 
   final MyCartChangeNotifier myCart;
 
