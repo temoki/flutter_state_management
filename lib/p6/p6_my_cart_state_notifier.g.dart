@@ -7,7 +7,7 @@ part of 'p6_my_cart_state_notifier.dart';
 // **************************************************************************
 
 String _$p6MyCartStateNotifierHash() =>
-    r'b0618636cdd12f3cf9776af61c3e3d6d89417ec3';
+    r'cd8434ae1c0da2255f19e2b426de06150a1656d1';
 
 /// See also [P6MyCartStateNotifier].
 @ProviderFor(P6MyCartStateNotifier)

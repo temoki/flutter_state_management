@@ -75,6 +75,15 @@
                 "--dart-define",
                 "P=8",
             ]
+        },
+        {
+            "name": "P9 / Redux",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=9",
+            ]
         }
     ]
 }

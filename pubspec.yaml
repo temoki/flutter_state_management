@@ -14,10 +14,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc:
+  flutter_redux:
   flutter_riverpod:
   freezed_annotation:
   intl:
   provider:
+  redux:
   riverpod_annotation:
   scoped_model:
 

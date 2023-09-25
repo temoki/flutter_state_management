@@ -16,7 +16,8 @@ Implementations of the app example from the [Simple app state management](https:
 | P5 | [Riverpod](#p5--riverpod) | [lib/p5](./lib/p5) |
 | P6 | [Riverpod Generator](#p6--riverpod-generator) | [lib/p6](./lib/p6) |
 | P7 | [BLoC](#p7--bloc) | [lib/p7](./lib/p7) |
-| P8 | [Scoped Model](#p7--scoped--model) | [lib/p8](./lib/p8) |
+| P8 | [Scoped Model](#p8--scoped--model) | [lib/p8](./lib/p8) |
+| P9 | [Redux](#p9--redux) | [lib/p9](./lib/p9) |
 
 ### P1 / StatefulWidget only
 - Lift up the state shared by multiple widgets to their parent [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
@@ -431,3 +432,8 @@ class P8MyCartPage extends StatelessWidget {
                               ScopedModel.of<P8MyCartModel>(context)
                                   .remove(item),
 ```
+
+### P9 / Redux
+This pattern uses the [flutter_redux](https://pub.dev/packages/flutter_redux).
+
+_T.B.D._
