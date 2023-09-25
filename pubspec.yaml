@@ -19,6 +19,7 @@ dependencies:
   intl:
   provider:
   riverpod_annotation:
+  scoped_model:
 
 dev_dependencies:
   build_runner:

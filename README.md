@@ -16,6 +16,7 @@ Implementations of the app example from the [Simple app state management](https:
 | P5 | [Riverpod](#p5--riverpod) | [lib/p5](./lib/p5) |
 | P6 | [Riverpod Generator](#p6--riverpod-generator) | [lib/p6](./lib/p6) |
 | P7 | [BLoC](#p7--bloc) | [lib/p7](./lib/p7) |
+| P8 | [Scoped Model](#p7--scoped--model) | [lib/p8](./lib/p8) |
 
 ### P1 / StatefulWidget only
 - Lift up the state shared by multiple widgets to their parent [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
@@ -60,9 +61,10 @@ class MyCartChangeNotifier with ChangeNotifier {
 
   UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
 
-  void add(Item item) { ... }
-
-  void remove(Item item) { ... }
+  void add(Item item) {
+    _items.add(item);
+    notifyListeners();
+  }
 ```
 
 - Keep ChangeNotifier in the parent widget of multiple widgets that require it.
@@ -242,9 +244,11 @@ final p5MyCartStateNotifierProvider =
 class P5MyCartStateNotifier extends StateNotifier<MyCartState> {
   P5MyCartStateNotifier() : super(const MyCartState());
 
-  void add(Item item) { ... }
-
-  void remove(Item item) { ... }
+  void add(Item item) {
+    if (!state.items.contains(item)) {
+      state = state.copyWith(items: {...state.items, item});
+    }
+  }
 ```
 
 - Watch StateNotifierProvider and rebuild when state is updated.
@@ -289,18 +293,20 @@ class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
   @override
   MyCartState build() => const MyCartState();
 
-  void add(Item item) { ... }
-
-  void remove(Item item) { ... }
+  void add(Item item) {
+    if (!state.items.contains(item)) {
+      state = state.copyWith(items: {...state.items, item});
+    }
+  }
 ```
 
 ### P7 / BLoC
 This pattern uses the [flutter_bloc](https://pub.dev/packages/flutter_bloc).
 
+- Include the state shared by multiple widgets and its update logic in the [Cubit](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/Cubit-class.html).
 ```dart
 // lib/p7/p7_my_cart_cubit.dart
 
-- Include the state shared by multiple widgets and its update logic in the [Cubit](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/Cubit-class.html).
 // ⭐️ Include the state shared by multiple widgets and its update logic in the Cubit.
 class P7MyCartCubit extends Cubit<MyCartState> {
   P7MyCartCubit() : super(const MyCartState());
@@ -358,4 +364,70 @@ class P7MyCartPage extends StatelessWidget {
                           // ⭐️ Update state with Cubit.
                           onTapRemove: () =>
                               context.read<P7MyCartCubit>().remove(item),
+```
+
+### P8 / Scoped Model
+This pattern uses the [scoped_model](https://pub.dev/packages/scoped_model).
+
+- Include the state shared by multiple widgets and its update logic in the [Model](https://pub.dev/documentation/scoped_model/latest/scoped_model/Model-class.html).
+```dart
+// lib/p8/p8_my_cart_model.dart
+
+// ⭐️ Include the state shared by multiple widgets and its update logic in the Model.
+class P8MyCartModel extends Model {
+  final Set<Item> _items = {};
+
+  UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
+
+  void add(Item item) {
+    _items.add(item);
+    notifyListeners();
+  }
+```
+
+- Insert [ScopedModel](https://pub.dev/documentation/scoped_model/latest/scoped_model/ScopedModel-class.html) with Model in Widget tree.
+```dart
+// lib/p8/p8_app.dart
+
+class P8App extends StatelessWidget {
+  const P8App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Insert ScopedModel with Model in Widget tree.
+    return ScopedModel<P8MyCartModel>(
+      model: P8MyCartModel(),
+      child: MaterialApp(
+```
+
+- Use [ScopedModelDescendant](https://pub.dev/documentation/scoped_model/latest/scoped_model/ScopedModelDescendant-class.html) to listen to changes in the Model.
+- Update state with Model.
+```dart
+// lib/p8/p8_my_cart_page.dart
+
+class P8MyCartPage extends StatelessWidget {
+  const P8MyCartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P8)'),
+      ),
+      // ⭐️ Use ScopedModelDescendant to listen to changes in the Model.
+      body: ScopedModelDescendant<P8MyCartModel>(
+        builder: (context, child, myCart) => Column(
+          children: [
+            Expanded(
+              child: myCart.items.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: myCart.items.length,
+                      itemBuilder: (context, index) {
+                        final item = myCart.items.elementAt(index);
+                        return CartItemTile(
+                          item: item,
+                          // ⭐️ Update state with Model.
+                          onTapRemove: () =>
+                              ScopedModel.of<P8MyCartModel>(context)
+                                  .remove(item),
 ```

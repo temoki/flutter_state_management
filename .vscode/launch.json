@@ -66,6 +66,15 @@
                 "--dart-define",
                 "P=7",
             ]
+        },
+        {
+            "name": "P8 / Scoped Model",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=8",
+            ]
         }
     ]
 }

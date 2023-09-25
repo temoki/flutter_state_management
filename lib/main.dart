@@ -5,6 +5,7 @@ import 'package:app/p4/p4_app.dart';
 import 'package:app/p5/p5_app.dart';
 import 'package:app/p6/p6_app.dart';
 import 'package:app/p7/p7_app.dart';
+import 'package:app/p8/p8_app.dart';
 import 'package:flutter/widgets.dart';
 
 void main() {
@@ -18,6 +19,7 @@ void main() {
       5 => const P5App(),
       6 => const P6App(),
       7 => const P7App(),
+      8 => const P8App(),
       _ => throw Exception('Unknown P value: $p'),
     },
   );
