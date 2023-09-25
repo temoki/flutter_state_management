@@ -57,6 +57,15 @@
                 "--dart-define",
                 "P=6",
             ]
+        },
+        {
+            "name": "P7 / BLoC",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=7",
+            ]
         }
     ]
 }

@@ -12,9 +12,10 @@ Implementations of the app example from the [Simple app state management](https:
 | P1 | [StatefulWidget only](#p1--statefulwidget-only) | [lib/p1](./lib/p1) |
 | P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
 | P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
-| P4 | [ChangeNotifierProvider (Provider package)](p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
-| P5 | [Riverpod](https://github.com/temoki/flutter_state_management#p5--riverpod) | [lib/p5](./lib/p5) |
-| P6 | [Riverpod Generator](https://github.com/temoki/flutter_state_management#p6--riverpod-generator) | [lib/p6](./lib/p6) |
+| P4 | [ChangeNotifierProvider (Provider package)](#p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
+| P5 | [Riverpod](#p5--riverpod) | [lib/p5](./lib/p5) |
+| P6 | [Riverpod Generator](#p6--riverpod-generator) | [lib/p6](./lib/p6) |
+| P7 | [BLoC](#p7--bloc) | [lib/p7](./lib/p7) |
 
 ### P1 / StatefulWidget only
 - Lift up the state shared by multiple widgets to their parent [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
@@ -291,4 +292,70 @@ class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
   void add(Item item) { ... }
 
   void remove(Item item) { ... }
+```
+
+### P7 / BLoC
+This pattern uses the [flutter_bloc](https://pub.dev/packages/flutter_bloc).
+
+```dart
+// lib/p7/p7_my_cart_cubit.dart
+
+- Include the state shared by multiple widgets and its update logic in the [Cubit](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/Cubit-class.html).
+// ⭐️ Include the state shared by multiple widgets and its update logic in the Cubit.
+class P7MyCartCubit extends Cubit<MyCartState> {
+  P7MyCartCubit() : super(const MyCartState());
+
+  void add(Item item) {
+    if (!state.items.contains(item)) {
+      emit(state.copyWith(items: {...state.items, item}));
+    }
+  }
+
+  void remove(Item item) { ... }
+```
+
+- Insert [BlocProvider](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/BlocProvider-class.html) with Cubit in Widget tree.
+```dart
+// lib/p7/p7_app.dart
+
+class P7App extends StatelessWidget {
+  const P7App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Insert BlocProvider with Cubit in Widget tree.
+    return BlocProvider(
+      create: (context) => P7MyCartCubit(),
+      child: MaterialApp(
+```
+
+- Use [BlocBuilder](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/BlocBuilder-class.html) to listen to changes in the Cubit.
+- Update state with Cubit.
+```dart
+// lib/p7/p7_my_cart_page.dart
+
+class P7MyCartPage extends StatelessWidget {
+  const P7MyCartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My Cart (P7)'),
+      ),
+      // ⭐️ Use BlocBuilder to listen to changes in the Cubit.
+      body: BlocBuilder<P7MyCartCubit, MyCartState>(
+        builder: (context, myCart) => Column(
+          children: [
+            Expanded(
+              child: myCart.items.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: myCart.items.length,
+                      itemBuilder: (context, index) {
+                        final item = myCart.items.elementAt(index);
+                        return CartItemTile(
+                          item: item,
+                          // ⭐️ Update state with Cubit.
+                          onTapRemove: () =>
+                              context.read<P7MyCartCubit>().remove(item),
 ```

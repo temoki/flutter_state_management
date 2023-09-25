@@ -13,6 +13,7 @@ dependencies:
   badges:
   flutter:
     sdk: flutter
+  flutter_bloc:
   flutter_riverpod:
   freezed_annotation:
   intl:
