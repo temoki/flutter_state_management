@@ -11,7 +11,6 @@ class P1App extends StatefulWidget {
 }
 
 class _P1AppState extends State<P1App> {
-  // ignore: lines_longer_than_80_chars
   // ⭐️ Lift up the state shared by multiple widgets to their parent StatefulWidget.
   final Set<Item> myCartItems = {};
 

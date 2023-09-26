@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class P2App extends StatelessWidget {
   P2App({super.key});
 
-  // ignore: lines_longer_than_80_chars
   // ⭐️ Keep ChangeNotifier in the parent widget of multiple widgets that require it.
   final myCart = MyCartChangeNotifier();
 

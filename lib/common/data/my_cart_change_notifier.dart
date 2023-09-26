@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:app/common/data/item.dart';
 import 'package:flutter/material.dart';
 
-// ignore: lines_longer_than_80_chars
 // ⭐️ Include the state shared by multiple widgets and its update logic in the ChangeNotifier.
 class MyCartChangeNotifier with ChangeNotifier {
   final Set<Item> _items = {};

@@ -2,4 +2,8 @@
 include: package:pedantic_mono/analysis_options.yaml
 
 errors:
-    invalid_annotation_target: ignore
+  invalid_annotation_target: ignore
+
+linter:
+  rules:
+    lines_longer_than_80_chars: false

@@ -16,7 +16,6 @@ class P3MyCartInheritedWidget extends InheritedWidget {
   @override
   bool updateShouldNotify(P3MyCartInheritedWidget oldWidget) => false;
 
-  // ignore: lines_longer_than_80_chars
   // ⭐️ Static method `of` to get the InheritedWidget that is an ancestor of the Widget tree.
   static P3MyCartInheritedWidget of(BuildContext context) {
     final widget = context
