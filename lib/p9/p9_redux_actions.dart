@@ -1,5 +1,6 @@
 import 'package:app/common/data/item.dart';
 
+// ⭐️ Define actions to update the state.
 sealed class Action {
   const Action._();
 }

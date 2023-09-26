@@ -20,6 +20,7 @@ class P9CatalogPage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
+            // ⭐️ Connect the Store to widgets that are affected by some state updates.
             child: StoreConnector<P9ReduxState, int>(
               converter: (store) => store.state.myCart.items.length,
               builder: (context, itemsCount) => CartButton(
@@ -30,8 +31,10 @@ class P9CatalogPage extends StatelessWidget {
           ),
         ],
       ),
+      // ⭐️ Wrap widgets affected by state updates in StoreBuilder.
       body: StoreBuilder<P9ReduxState>(
         builder: (context, store) => RefreshIndicator(
+          // ⭐️ Dispatch the action that updates the state to the Store.
           onRefresh: () async =>
               store.dispatch(const RefreshCatalogItemsAction()),
           child: FutureBuilder<List<Item>>(

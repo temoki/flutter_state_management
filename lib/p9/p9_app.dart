@@ -16,6 +16,7 @@ class P9App extends StatefulWidget {
 }
 
 class _P9AppState extends State<P9App> {
+  // ⭐️ Create Store as a final variable inside a State object.
   final store = Store<P9ReduxState>(
     reducer,
     initialState: P9ReduxState(
@@ -26,6 +27,7 @@ class _P9AppState extends State<P9App> {
 
   @override
   Widget build(BuildContext context) {
+    // ⭐️ Wrap app widget with a StoreProvider and pass the Store.
     return StoreProvider<P9ReduxState>(
       store: store,
       child: MaterialApp(

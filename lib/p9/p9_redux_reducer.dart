@@ -3,6 +3,7 @@ import 'package:app/common/data/my_cart_state.dart';
 import 'package:app/p9/p9_redux_actions.dart';
 import 'package:app/p9/p9_redux_state.dart';
 
+// ⭐️ Reducer updates state according to dispatched actions.
 P9ReduxState reducer(P9ReduxState state, dynamic action) {
   if (action is Action) {
     return switch (action) {

@@ -12,7 +12,7 @@ Implementations of the app example from the [Simple app state management](https:
 | P1 | [StatefulWidget only](#p1--statefulwidget-only) | [lib/p1](./lib/p1) |
 | P2 | [ChangeNotifier](#p2--changenotifier) | [lib/p2](./lib/p2) |
 | P3 | [ChangeNotifier + InheritedWidget](#p3--changenotifier--inheritedwidget) | [lib/p3](./lib/p3) |
-| P4 | [ChangeNotifierProvider (Provider package)](#p4--changenotifierprovider-provider-package) | [lib/p4](./lib/p4) |
+| P4 | [ChangeNotifier + Provider](#p4--changenotifier--provider) | [lib/p4](./lib/p4) |
 | P5 | [Riverpod](#p5--riverpod) | [lib/p5](./lib/p5) |
 | P6 | [Riverpod Generator](#p6--riverpod-generator) | [lib/p6](./lib/p6) |
 | P7 | [BLoC](#p7--bloc) | [lib/p7](./lib/p7) |
@@ -186,7 +186,7 @@ class P3MyCartPage extends StatelessWidget {
         builder: (context, child) => Column(
 ```
 
-### P4 / ChangeNotifierProvider (Provider package)
+### P4 / ChangeNotifier + Provider
 This pattern uses the [provider](https://pub.dev/packages/provider) package.
 
 - Insert [ChangeNotifierProvider](https://pub.dev/documentation/provider/latest/provider/ChangeNotifierProvider-class.html) with ChangeNotifier in Widget tree.
@@ -204,7 +204,7 @@ class P4App extends StatelessWidget {
       child: MaterialApp(
 ```
 
-- Use Consumer to listen to changes in ChangeNotifier.
+- Use [Consumer](https://pub.dev/documentation/provider/latest/provider/Consumer-class.html) to listen to changes in ChangeNotifier.
 ```dart
 // p4/p4_my_cart_page.dart
 
@@ -302,7 +302,7 @@ class P6MyCartStateNotifier extends _$P6MyCartStateNotifier {
 ```
 
 ### P7 / BLoC
-This pattern uses the [flutter_bloc](https://pub.dev/packages/flutter_bloc).
+Implement the BLoC pattern using the [flutter_bloc](https://pub.dev/packages/flutter_bloc) package.
 
 - Include the state shared by multiple widgets and its update logic in the [Cubit](https://pub.dev/documentation/flutter_bloc/latest/flutter_bloc/Cubit-class.html).
 ```dart
@@ -434,6 +434,91 @@ class P8MyCartPage extends StatelessWidget {
 ```
 
 ### P9 / Redux
-This pattern uses the [flutter_redux](https://pub.dev/packages/flutter_redux).
+Implement Redux pattern using [flutter_redux](https://pub.dev/packages/flutter_redux) and [redux](https://pub.dev/packages/redux) packages.
 
-_T.B.D._
+- Create [Store](https://pub.dev/documentation/redux/latest/redux/Store-class.html) as a final variable inside a State object.
+- Wrap app widget with a [StoreProvider](https://pub.dev/documentation/flutter_redux/latest/flutter_redux/StoreProvider-class.html) and pass the Store.
+```dart
+// lib/p9/p9_app.dart
+
+class _P9AppState extends State<P9App> {
+  // ⭐️ Create Store as a final variable inside a State object.
+  final store = Store<P9ReduxState>(
+    reducer,
+    initialState: P9ReduxState(
+      catalogItems: fetchCatalogItems(),
+      myCart: const MyCartState(),
+    ),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    // ⭐️ Wrap app widget with a StoreProvider and pass the Store.
+    return StoreProvider<P9ReduxState>(
+      store: store,
+      child: MaterialApp(
+```
+
+- Define actions to update the state.
+```dart
+// lib/p9/p9_redux_actions.dart
+
+// ⭐️ Define actions to update the state.
+sealed class Action {
+  const Action._();
+}
+
+class RefreshCatalogItemsAction implements Action { ... }
+class AddItemToMyCartAction implements Action { ... }
+```
+
+- [Reducer](https://pub.dev/documentation/redux/latest/redux/Reducer.html) updates state according to dispatched actions.
+```dart
+// lib/p9/p9_redux_reducer.dart
+
+// ⭐️ Reducer updates state according to dispatched actions.
+P9ReduxState reducer(P9ReduxState state, dynamic action) {
+  if (action is Action) {
+    return switch (action) {
+      RefreshCatalogItemsAction() => state.copyWith(
+          catalogItems: fetchCatalogItems(),
+        ),
+```
+
+- Connect the store with a [StoreConnector](https://pub.dev/documentation/flutter_redux/latest/flutter_redux/StoreConnector-class.html) to widgets that are affected by some state updates.
+- Wrap widgets affected by state updates in [StoreBuilder](https://pub.dev/documentation/flutter_redux/latest/flutter_redux/StoreBuilder-class.html).
+- [Dispatch](https://pub.dev/documentation/redux/latest/redux/Store/dispatch.html) the action that updates the state to the Store.
+```dart
+// lib/p9_p9_catalog_page.dart
+
+class P9CatalogPage extends StatelessWidget {
+  const P9CatalogPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Catalog (P9)'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            // ⭐️ Connect the Store to widgets that are affected by some state updates.
+            child: StoreConnector<P9ReduxState, int>(
+              converter: (store) => store.state.myCart.items.length,
+              builder: (context, itemsCount) => CartButton(
+                badgeCount: itemsCount,
+                onPressed: () => Navigator.of(context).pushNamed('/my_cart'),
+              ),
+            ),
+          ),
+        ],
+      ),
+      // ⭐️ Wrap widgets affected by state updates in StoreBuilder.
+      body: StoreBuilder<P9ReduxState>(
+        builder: (context, store) => RefreshIndicator(
+          // ⭐️ Dispatch the action that updates the state to the Store.
+          onRefresh: () async =>
+              store.dispatch(const RefreshCatalogItemsAction()),
+          child: FutureBuilder<List<Item>>(
+            future: store.state.catalogItems,
+```
