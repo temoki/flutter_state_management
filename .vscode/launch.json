@@ -84,6 +84,15 @@
                 "--dart-define",
                 "P=9",
             ]
+        },
+        {
+            "name": "P10 / MobX",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "P=10",
+            ]
         }
     ]
 }

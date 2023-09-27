@@ -270,6 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_mobx:
+    dependency: "direct main"
+    description:
+      name: flutter_mobx
+      sha256: "2aa91babd4b66a7345675f67e3733a35ec6da3f42ad86799fce5363a322944be"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   flutter_redux:
     dependency: "direct main"
     description:
@@ -427,6 +435,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  mobx:
+    dependency: "direct main"
+    description:
+      name: mobx
+      sha256: "0afcf88b3ee9d6819890bf16c11a727fc8c62cf736fda8e5d3b9b4eace4e62ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
+  mobx_codegen:
+    dependency: "direct dev"
+    description:
+      name: mobx_codegen
+      sha256: "52a6904b93fa1ceadc5ed4cd67e24fd05a21340d39cff0a213179fc83e179dba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   nested:
     dependency: transitive
     description:

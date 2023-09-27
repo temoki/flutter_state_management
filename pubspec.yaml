@@ -14,10 +14,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc:
+  flutter_mobx:
   flutter_redux:
   flutter_riverpod:
   freezed_annotation:
   intl:
+  mobx:
   provider:
   redux:
   riverpod_annotation:
@@ -29,6 +31,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed:
+  mobx_codegen:
   pedantic_mono:
   riverpod_generator:
 
